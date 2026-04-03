@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>nillkanth jewellers | Premium Gold Jewellery</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
+
+        /* Black & White Jewellery Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/3682961/pexels-photo-3682961.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: grayscale(100%) brightness(0.2) contrast(1.3);
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,15,10,0.9));
+            z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #d4af37, #b87c2e);
+            border-radius: 10px;
+        }
+
+        /* ========== FIXED NAVIGATION - STAYS ON TOP WHEN SCROLLING ========== */
+        .navbar {
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f9e186, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; text-shadow: 0 0 8px rgba(212,175,55,0.3); }
+        }
+        .logo i {
+            color: #d4af37;
+            margin-right: 5px;
+        }
+
+        /* Navigation Links - Single Line */
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            flex-wrap: nowrap;
+        }
+        .nav-links a {
+            color: #e8e8e8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            white-space: nowrap;
+        }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f9e186);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 100%;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #d4af37;
+        }
+
+        /* Add padding to body to account for fixed navbar */
+        main {
+            padding-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 5rem;
+            position: relative;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #f9e186, #d4af37, #e6c347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeInUp 0.8s ease;
+        }
+        .hero p {
+            color: #d4d4d4;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(184,124,46,0.2));
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1.8rem;
+            border: 1px solid rgba(212,175,55,0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(212,175,55,0); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            min-height: 60vh;
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: pageFade 0.5s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        /* Products Grid - 15 Images with Animation */
+        .jewellery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            animation: cardFloat 0.6s ease backwards;
+            animation-delay: calc(var(--order) * 0.05s);
+        }
+        @keyframes cardFloat {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #d4af37;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
+            background: rgba(35, 35, 35, 0.9);
+        }
+        .img-wrapper {
+            position: relative;
+            height: 290px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+            filter: grayscale(20%);
+        }
+        .card:hover .img-wrapper img {
+            transform: scale(1.12);
+            filter: grayscale(0%);
+        }
+        .img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .card:hover .img-wrapper::after {
+            left: 100%;
+        }
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #d4af37, #b57c1c);
+            color: #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .card-content {
+            padding: 1.3rem;
+            text-align: center;
+        }
+        .card-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+        }
+        .product-desc {
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            margin: 0.4rem 0;
+        }
+        .weight {
+            font-size: 0.7rem;
+            background: rgba(212,175,55,0.2);
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            color: #d4af37;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f9e186;
+            margin: 0.5rem 0;
+        }
+        .btn-buy {
+            background: linear-gradient(95deg, #d4af37, #b57c1c);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 85%;
+            justify-content: center;
+            color: #1a1a1a;
+        }
+        .btn-buy:hover {
+            transform: scale(0.97);
+            background: linear-gradient(95deg, #e6c347, #c98a2a);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
+        }
+
+        /* Collection Filters */
+        .collection-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(212,175,55,0.4);
+            padding: 8px 24px;
+            border-radius: 30px;
+            color: #e8e8e8;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #d4af37;
+            color: #1a1a1a;
+            border-color: #d4af37;
+        }
+
+        /* About Page */
+        .about-container {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .about-container h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: rgba(30,30,30,0.6);
+            backdrop-filter: blur(8px);
+            padding: 1.3rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+        }
+        .feature-card i {
+            font-size: 2rem;
+            color: #d4af37;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Contact Page */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .contact-info h2, .contact-form h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            background: rgba(30,30,30,0.5);
+            border-radius: 1rem;
+            transition: 0.3s;
+        }
+        .info-item:hover {
+            background: rgba(212,175,55,0.1);
+            transform: translateX(5px);
+        }
+        .info-item i {
+            font-size: 1.3rem;
+            color: #d4af37;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            background: rgba(30,30,30,0.8);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        .submit-contact {
+            background: linear-gradient(95deg, #B09A52, #b57c1c);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #1a1a1a;
+            width: 100%;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-card {
+            background: #000000;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border-top: 4px solid #d4af37;
+        }
+        .modal-card h2 {
+            color: #d4af37;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid #444;
+            background: #000000;
+            color: #fff;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+        .send-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .cancel-btn {
+            background: #555;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .close-icon {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #aaa;
+            border-top: 1px solid rgba(212,175,55,0.2);
+            margin-top: 3rem;
+            background: rgba(0,0,0,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 0.8rem 1rem; flex-direction: column; gap: 0.8rem; }
+            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { font-size: 0.9rem; white-space: nowrap; }
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            main { padding-top: 110px; }
+            .hero {
+    height: 100vh;
+    background-image: url('https://i.ibb.co/TDXG5xnB/IMG-20260403-WA0002.jpg');
+    background-size: cover;
+    background-position: center;
+}
+        }
+    </style>
+</head>
+<body><header style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#fff;">
+    
+    <img src="images/logo.png" style="height:50px;">
+    
+    <nav>
+        <a href="#" style="margin:10px;">Home</a>
+        <a href="#" style="margin:10px;">Collection</a>
+        <a href="#" style="margin:10px;">Contact</a>
+    </nav>
+    
+</header>
+
+<!-- FIXED NAVIGATION - STAYS ON TOP WHEN SCROLLING -->
+<nav class="navbar">
+    <div class="logo"><i class="fas fa-crown"></i> NILLKANTH JEWELLERS</div>
+    <div class="nav-links">
+        <a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="nav-link" data-page="collection"><i class="fas fa-gem"></i> Collection</a>
+        <a href="#" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+</nav>
+
+<main>
+    <div class="hero">
+        <h1><i class=""></i>PREMIUMNILLKHANTH JEWELLERY<i class="fas fa-gem"></i></h1>
+        <p>Discover handcrafted 22K & 24K gold jewellery - Timeless elegance for every occasion</p>
+        <div class="hero-badge">
+            <i class="fab fa-">W e l c o m e o u r w e b </i> 
+        </div>
+</div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active-page">
+            <h2 class="section-title">✨ premium Gold collection ✨</h2>
+            <div class="jewellery-grid" id="featuredGrid"></div>
+        </div>
+
+        <!-- COLLECTION PAGE - Full 15 Products -->
+        <div id="collectionPage" class="page">
+            <h2 class="section-title">📿 Complete Collection </h2>
+            <div class="collection-filters">
+                <button class="filter-btn active" data-filter="all">All (15)</button>
+                <button class="filter-btn" data-filter="necklace">Necklaces</button>
+                <button class="filter-btn" data-filter="earrings">Earrings</button>
+                <button class="filter-btn" data-filter="rings">Rings</button>
+                <button class="filter-btn" data-filter="bangles">Bangles & Sets</button>
+            </div>
+            <div class="jewellery-grid" id="collectionGrid"></div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="aboutPage" class="page">
+            <div class="about-container">
+                <h2><i class="fas fa-crown"></i> Our Golden Legacy</h2>
+                <h3>Instagram ID
+                @nilkanth_jewellers_50<br>@tilak.soni123</br>
+                YouTube ID
+                <br>NilkanthJewellers Official</br></h3>
+                <div style="max-width: 300px; margin: auto;">
+  <video 
+    src="sona.mp4" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    style="width: 110%; height: auto; border-radius: 10px;">
+  </video>
+</div>
+<div style="max-width: 300px; margin: auto;">
+  <img 
+    src="old.jpg" 
+    alt="Jewellery Image"
+    style="width: 110%; height: auto; border-radius: 10px;">
+</div>
+<div style="max-width: 300px; margin: auto;">
+  <img 
+    src="7.png" 
+    alt="Jewellery Image"
+    style="width: 110%; height: auto; border-radius: 10px;
+    </div>
+                
+                <div class="about-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-certificate"></i>
+                        <h4>100% Hallmarked</h4>
+                        <p>Certified purity with BIS hallmark</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-truck"></i>
+                        <h4>Free Shipping</h4>
+                        <p>All India delivery available</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Lifetime Exchange</h4>
+                        <p>100% buyback & exchange guarantee</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-gem"></i>
+                        <h4>Handcrafted</h4>
+                        <p>Artisan creations, unique designs</p>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-history"></i> Our Story</h3>
+                <p>Have trust from everyone and get pure gold only for Neelkanth Jewelers 25 years of experience so today go visit the shop</p>
+                
+                <h3><i class="fas fa-medal"></i> Why Choose Us?</h3>
+                <p>✓ 100% transparent pricing with making charges disclosed upfront<br>
+                ✓ Free insured shipping across India with real-time tracking<br>
+                ✓ 7-day hassle-free returns & lifetime exchange policy<br>
+                ✓ Certified purity with BIS hallmark & independent lab reports<br>
+                ✓ Exclusive designs you won't find anywhere else<br>
+                ✓ Personalised customer service with dedicated jewellery consultants</p>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contactPage" class="page">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2><i class="fas fa-address-card"></i> Get in Touch</h2>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div><strong>Visit Us</strong><br>Shagun fashion  ni  samne station road Dhanera</div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div><strong>Call Us</strong><br>+91 9558381550</div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div><strong>WhatsApp</strong><br>+91 9558381550 (9:30 AM - 8 PM)</div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div><strong>Email</strong><br>tilaksoni036@gmail.com</div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div><strong>Working Hours</strong><br>Mon-Sat: 9:30 AM - 8:00 PM</div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2><i class="fas fa-paper-plane"></i> Send a Message</h2>
+                    <form id="contactForm">
+                        <input type="text" id="contactName" placeholder="Your Name" required>
+                        <input type="email" id="contactEmail" placeholder="Your Email" required>
+                        <input type="text" id="contactPhone" placeholder="Phone Number">
+                        <textarea id="contactMsg" rows="4" placeholder="Your Message..." required></textarea>
+                        <button type="submit" class="submit-contact"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-ring"></i> Golden Heritage | BIS Hallmarked Jewellery | Legacy of Trust
+        <p>© 2026 develop by Ashish Soni/lunvexastudio </p>
+    </footer>
+</main>
+
+<!-- MODAL FOR ORDER -->
+<div id="orderModal" class="modal">
+    <div class="modal-card">
+        <span class="close-icon" id="closeModalBtn">&times;</span>
+        <h2><i class="fas fa-shopping-cart"></i> Place Your Order</h2>
+        <p id="modalProductInfo" style="color: #d4af37;"></p>
+        <form id="whatsappOrderForm">
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="custName" required>
+            </div>
+            <div class="form-group">
+                <label>Address *</label>
+                <input type="text" id="custAddress" required>
+            </div>
+            <div class="form-group">
+                <label>City *</label>
+                <input type="text" id="custCity" required>
+            </div>
+            <div class="form-group">
+                <label>PIN Code *</label>
+                <input type="text" id="custPincode" pattern="[0-9]{6}" required>
+            </div>
+            <div class="form-group">
+                <label>Landmark / Location</label>
+                <input type="text" id="custLocation">
+            </div>
+            <div class="form-group">
+                <label>Your Message</label>
+                <textarea id="custMessage" rows="2" placeholder="Size, occasion, or special request..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" id="cancelModalBtn">Cancel</button>
+                <button type="submit" class="send-btn"><i class="fab fa-whatsapp"></i> Send on WhatsApp</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // ==================== 15 JEWELLERY PRODUCTS WITH IMAGES ====================
+    const jewellery = [
+        { id:1, name:"premium luxury silver stainless steel", category:"Earrings", desc:"premium silver products order now thanks for visit", weight:"", price:"₹3000", img:"https://i.ibb.co/qXmF4B5/IMG-20260402-WA0026.jpg" },
+        { id:2, name:"silver bracelet", category:"earrings", desc:"silver premium bracelet by nillkanth jewellery", weight:"", price:"₹3,200", img:"https://i.ibb.co/qLf3XYGt/IMG-20260402-WA0022.jpg" },
+        { id:3, name:"silver bracelet gents and ladies", category:"necklace", desc:"available this stock order now by Nillkanth jewellery", weight:"", price:"₹2000", img:"https://i.ibb.co/9k1BHm6L/IMG-20260402-WA0027.jpg" },
+        { id:4, name:"SILVER BALI SET", category:"bangles", desc:"SILVER PREMIUM JEWELLERY", weight:"", price:"₹950", img:"https://i.ibb.co/wZmbQqGX/IMG-20260402-WA0021.jpg" },
+        { id:5, name:"stainless steel", category:"necklace", desc:"premium silver jewellery order now by nillkanth", weight:"", price:"₹1600", img:"https://i.ibb.co/jKv9X0m/IMG-20260402-WA0024.jpg" },
+        { id:6, name:"silver set", category:"rings", desc:"new silver set order now by nillkanth jewellery", weight:"", price:"₹6000", img:"https://i.ibb.co/jP5vbH39/IMG-20260402-WA0023.jpg" },
+        { id:7, name:"bracelet", category:"necklace", desc:"silver bracelet gents and ladies order now by nillkanth jewellers", weight:"", price:"₹2000", img:"https://i.ibb.co/JFHWzB28/IMG-20260403-WA0009.jpg" },
+        { id:8, name:"new design bracelet", category:"earrings", desc:"available order now by nillkanth jewellers", weight:"", price:"₹2000", img:"https://i.ibb.co/qYZfTWnG/IMG-20260403-WA0006.jpg" },
+        { id:9, name:"Krishna new silver set", category:"bangles", desc:"new silver set", weight:"", price:"₹6000", img:"https://i.ibb.co/h1Hv6X7T/IMG-20260403-WA0005.jpg" },
+        { id:10, name:"silver set", category:"necklace", desc:"order now by nillkanth jewellers", weight:"", price:"₹6000", img:"https://i.ibb.co/MkNfTS3G/IMG-20260403-WA0007.jpg" },
+        { id:11, name:"out of stock", category:"necklace", desc:"silver set order now", weight:"", price:"₹", img:"" },
+        { id:12, name:"out of stock", category:"please waiting few days", desc:"Gold nose pin with stone work", weight:"", price:"₹", img:"" },
+        { id:13, name:"out of stock", category:"bangles", desc:"please waiting few days", weight:"", price:"₹", img:"" },
+        { id:14, name:"out of stock", category:"necklace", desc:"please waiting few days", weight:"", price:"₹", img:"" },
+        { id:15, name:"out of stock", category:"bangles", desc:"please waiting few days", weight:"", price:"₹", img:"" }
+    ];
+
+    const FALLBACK_IMG = "https://placehold.co/600x800/2a2a2a/d4af37?text=Golden+Jewel";
+    let selectedProduct = null;
+    const BUSINESS_WHATSAPP = "9558381550"; // Change this to your WhatsApp number
+
+    function createCardHTML(item, idx) {
+        return `
+            <div class="card" style="--order: ${idx}">
+                <div class="img-wrapper">
+                    <img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.src='${FALLBACK_IMG}'">
+                    <div class="card-badge">PRO</div>
+                </div>
+                <div class="card-content">
+                    <h3>${item.name}</h3>
+                    <div class="weight"><i class="fas fa-weight-hanging"></i> ${item.weight} • Nillkanth</div>
+                    <div class="product-desc">${item.desc}</div>
+                    <div class="price">${item.price}</div>
+                    <button class="btn-buy" data-id="${item.id}"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderFeatured() {
+        const featured = jewellery.slice(0, 6);
+        const grid = document.getElementById('featuredGrid');
+        if(grid) grid.innerHTML = featured.map((item, i) => createCardHTML(item, i)).join('');
+        attachBuyEvents();
+    }
+
+    function renderCollection(filter = 'all') {
+        const filtered = filter === 'all' ? jewellery : jewellery.filter(item => item.category === filter);
+        const grid = document.getElementById('collectionGrid');
+        if(grid) grid.innerHTML = filtered.map((item, i) => createCardHTML(item, i)).join('');
+        attachBuyEvents();
+    }
+
+    function attachBuyEvents() {
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                const product = jewellery.find(p => p.id === id);
+                if(product) openModal(product);
+            });
+        });
+    }
+
+    // Modal Functions
+    const modal = document.getElementById('orderModal');
+    const modalProductInfo = document.getElementById('modalProductInfo');
+
+    function openModal(product) {
+        selectedProduct = product;
+        modalProductInfo.innerHTML = `<strong>${product.name}</strong> | ${product.price} | Weight: ${product.weight}`;
+        document.getElementById('custName').value = '';
+        document.getElementById('custAddress').value = '';
+        document.getElementById('custCity').value = '';
+        document.getElementById('custPincode').value = '';
+        document.getElementById('custLocation').value = '';
+        document.getElementById('custMessage').value = '';
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() { modal.style.display = 'none'; selectedProduct = null; }
+
+    function submitOrder(e) {
+        e.preventDefault();
+        if(!selectedProduct) { alert("Please select a product"); return; }
+        const name = document.getElementById('custName').value.trim();
+        const address = document.getElementById('custAddress').value.trim();
+        const city = document.getElementById('custCity').value.trim();
+        const pincode = document.getElementById('custPincode').value.trim();
+        const location = document.getElementById('custLocation').value.trim();
+        const message = document.getElementById('custMessage').value.trim();
+        if(!name || !address || !city || !pincode) { alert("Please fill all required fields"); return; }
+        if(!/^\d{6}$/.test(pincode)) { alert("PIN Code must be 6 digits"); return; }
+        
+        let fullAddress = address + (location ? `, ${location}` : '') + `, ${city} - ${pincode}`;
+        let text = `🪙 GOLDEN HERITAGE ORDER 🪙%0A`;
+        text += `Product: ${selectedProduct.name}%0A`;
+        text += `Price: ${selectedProduct.price}%0A`;
+        text += `Name: ${name}%0A`;
+        text += `Address: ${fullAddress}%0A`;
+        text += `Message: ${message || 'No message'}%0A`;
+        text += `Order Time: ${new Date().toLocaleString()}`;
+        window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${text}`, '_blank');
+        alert("✅ Redirecting to WhatsApp! Please send the message to confirm your order.");
+        closeModal();
+    }
+
+    // Contact Form
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const phone = document.getElementById('contactPhone').value;
+        const msg = document.getElementById('contactMsg').value;
+        let text = `📞 Contact Enquiry from ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${msg}`;
+        window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${text}`, '_blank');
+        alert("✅ Message sent via WhatsApp! We'll get back to you soon.");
+        e.target.reset();
+    });
+
+    // Navigation - Page Switching
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+        document.getElementById(pageId + 'Page').classList.add('active-page');
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if(pageId === 'collection') renderCollection('all');
+    }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchPage(link.getAttribute('data-page'));
+        });
+    });
+
+    // Filter buttons for collection
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCollection(btn.getAttribute('data-filter'));
+        });
+    });
+
+    // Modal event listeners
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    document.getElementById('cancelModalBtn')?.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    document.getElementById('whatsappOrderForm')?.addEventListener('submit', submitOrder);
+
+    // Initialize
+    renderFeatured();
+    renderCollection('all');
+</script>
+</body>
+</html>
